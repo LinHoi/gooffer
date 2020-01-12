@@ -2,12 +2,19 @@ package main
 
 import "fmt"
 
-func hasPath(matrix [][]rune, visited [][]bool, targetString string) bool {
+func hasPath(matrix [][]rune, targetString string) bool {
 	if matrix == nil || targetString == "" {
 		return false
 	}
 	pathLength := 0
-	//row , col := len(matrix) , len(matrix[0])
+
+	//init visited Matrix
+	rows , cols := len(matrix) , len(matrix[0])
+	visited := make([][]bool,rows)
+	for row := 0; row <  rows; row++ {
+		visited[row] = make([]bool,cols)
+	}
+
 	for rowNum := range matrix {
 		for colNum := range matrix[rowNum] {
 			if hasPathCore(matrix, targetString,rowNum, colNum, pathLength, visited) {
@@ -15,36 +22,34 @@ func hasPath(matrix [][]rune, visited [][]bool, targetString string) bool {
 			}
 		}
 	}
-
 	return false
 }
 
 func hasPathCore(matrix [][]rune,targetString string, row int, col int, pathLength int, visited [][]bool) bool {
-	if pathLength == len(targetString){
+	if pathLength == len(targetString) {
 		return true
 	}
 	hasPath := false
 	rows := len(matrix)
 	cols := len(matrix[0])
 	if  row >= 0 &&
-		row <= rows &&
+		row < rows &&
 		col >= 0 &&
-		col <= cols &&
+		col < cols &&
 		matrix[row][col] == rune(targetString[pathLength]) &&
 		visited[row][col] == false {
 		pathLength ++
 		visited[row][col] = true
 		hasPath = hasPathCore(matrix,targetString,row,col-1,pathLength,visited)||
-						hasPathCore(matrix,targetString,row,col+1,pathLength,visited)||
-						hasPathCore(matrix,targetString,row-1,col,pathLength,visited)||
-						hasPathCore(matrix,targetString,row+1,col,pathLength,visited)
+			      hasPathCore(matrix,targetString,row,col+1,pathLength,visited)||
+			      hasPathCore(matrix,targetString,row-1,col,pathLength,visited)||
+			      hasPathCore(matrix,targetString,row+1,col,pathLength,visited)
 		if !hasPath {
 			pathLength --
 			visited[row][col] = false
 		}
 
 	}
-
 	return hasPath
 }
 
@@ -54,17 +59,14 @@ func main() {
 		{'c','f','c','s'},
 		{'j','d','e','h'},
 	}
-	visited := [][]bool{
-		{false,false,false,false},
-		{false,false,false,false},
-		{false,false,false,false},
-	}
-	fmt.Println(len(matrix), len(visited[0]))
+
 	targetStrings := []string{
-		"bfce",
-		"abfc",
+		"bfceh",
+		"abtg",
 		"abtgscfcjdeh",
-		//"sfetgdfgv",
+		"sfetgdfgv",
+		"qwrretfsdgddc",
+		"acjdehsgtbfc",
 	}
 	fmt.Println("Matrix M: ")
 	for i:= range matrix {
@@ -74,13 +76,11 @@ func main() {
 		fmt.Printf("\n")
 	}
 	for _,targetString := range targetStrings {
-		result := hasPath(matrix, visited, targetString)
+		result := hasPath(matrix, targetString)
 		if result == true {
-			fmt.Printf("Matrix M has a path of %s \n", targetString)
+			fmt.Printf("Matrix M has  path : %s \n", targetString)
 		} else {
-			fmt.Printf("Matrix M do not has a path of %s \n", targetString)
+			fmt.Printf("Matrix M does't have  path : %s \n", targetString)
 		}
 	}
-
-
 }
