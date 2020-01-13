@@ -23,7 +23,6 @@ func MaxProductAfterCuttingRope(length int64) int64 {
 }
 
 func main() {
-
 	for ropeLength := int64(0); ropeLength < 128 ; ropeLength ++ {
 		res := MaxProductAfterCuttingRope(ropeLength)
 		fmt.Printf("Max Product of rope with length:%d is %v \n",ropeLength, res)
