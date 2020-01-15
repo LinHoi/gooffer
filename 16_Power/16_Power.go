@@ -13,9 +13,9 @@ func Power(base float64, exp int64) float64 {
 		return 1
 	}
 	if exp < 0 {
-		return 1/power2(base,-exp)
+		return 1/power(base,-exp)
 	}else{
-		return power2(base, exp)
+		return power(base, exp)
 	}
 }
 var miniNum = 0.0000001
@@ -54,6 +54,7 @@ func main(){
 		{0.01, -1},
 		{0.01, 9},
 		{99.2, 3},
+		{1.00001,9999999},
 	}
 	for _, num := range nums {
 		result := Power(reflect.ValueOf(num[0]).Float(),reflect.ValueOf(num[1]).Int())
@@ -68,4 +69,5 @@ func main(){
 0.010000 Power -1 equals 100.000000
 0.010000 Power 9 equals 0.000000
 99.200000 Power 3 equals 976191.488000
+1.000010 Power 9999999 equals 26867465624547562954689949717628984064212992.000000
 */
