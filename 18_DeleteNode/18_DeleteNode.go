@@ -55,7 +55,7 @@ func main() {
 	DeleteNode(&root, root)
 	fmt.Println("List after delete root:")
 	PrintList(root)
-	fmt.Println("List after delete tail")
+	fmt.Println("List after delete tail:")
 	DeleteNode(&root, node4)
 	PrintList(root)
 }
