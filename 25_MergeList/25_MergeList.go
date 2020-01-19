@@ -6,11 +6,9 @@ type ListNode struct {
 	Value int
 	Next  *ListNode
 }
-
 func NewNode(value int, next *ListNode) *ListNode {
 	return &ListNode{value, next}
 }
-
 func PrintList(root *ListNode) {
 	for root != nil {
 		fmt.Printf("%d --> ", root.Value)
@@ -38,7 +36,7 @@ func MergeList(root1, root2 *ListNode) *ListNode {
 
 		}else {
 			preNode.Next = nextNode2
-			preNode =nextNode2
+			preNode = nextNode2
 			nextNode2 = nextNode2.Next
 		}
 	}
