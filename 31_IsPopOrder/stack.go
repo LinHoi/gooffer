@@ -1,6 +1,8 @@
 package main
 
-import "errors"
+import (
+	"errors"
+)
 
 type element struct {
 	Value int
@@ -74,3 +76,12 @@ func NewStack() *Stack {
 	return &Stack{elements}
 }
 
+func makeStack(array []int) *Stack {
+	stack := NewStack()
+	index := 0
+	for index < len (array) {
+		stack.Push(array[index])
+	}
+
+	return stack
+}
