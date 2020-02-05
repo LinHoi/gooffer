@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-errors/errors"
+	"errors"
 	"strconv"
 )
 
