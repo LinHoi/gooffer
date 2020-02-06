@@ -1,7 +1,7 @@
 package main
 
 import (
-	"../datastrature/dqueue"
+	"../datastructure/dqueue"
 	"fmt"
 )
 
